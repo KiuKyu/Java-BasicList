@@ -4,17 +4,21 @@ public class MyListTest {
         MyList<String> listString = new MyList<>();
         listInteger.add(1);
         listInteger.add(2);
+        listInteger.add(1, 4);
         listInteger.add(3);
-        listInteger.add(4);
         listString.add("6");
+        // Không thực sự đúng nếu k có hàm add lại giá trị phía sau
+        // hàm add kiểu này sẽ thay thế tất cả các value của nhưng object đứng sau index đều = index + 1
+        for (int i = 0; i < listInteger.size(); i++) {
+            System.out.println(listInteger.get(i));
+        }
 
-        System.out.println("element 4: " + listInteger.get(4));
-        System.out.println("element 1: " + listInteger.get(1));
-        System.out.println("element 2: " + listInteger.get(2));
+        // Remove
+        System.out.println("Sau xóa");
+        listInteger.remove(0);
+        for (int i = 0; i < listInteger.size(); i++) {
 
-//        listInteger.get(6);
-//        System.out.println("element 6: "+listInteger.get(6));
-        listInteger.get(-1);
-        System.out.println("element -1: " + listInteger.get(-1));
+            System.out.println(listInteger.get(i));
+        }
     }
 }

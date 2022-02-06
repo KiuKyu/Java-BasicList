@@ -9,6 +9,9 @@ public class MyList<E> { // E là Generic
         this.elements = new Object[DEFAULT_CAPACITY]; // mảng chứa 10 phần tử
     }
 
+    public int size() {
+        return this.size;
+    }
     private void ensureCapacity() {
 //        int newCapacity = DEFAULT_CAPACITY * 2;
 //          => Không dùng DEFAULT_CAPACITY do chỉ đúng cho lần đầu khởi tạo mảng do đây là 1 hằng số
@@ -25,11 +28,32 @@ public class MyList<E> { // E là Generic
         this.elements[this.size++] = e; // sau khi thêm e vào mảng thì this.size ++
     }
 
+    public void add(int index, E e) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size" + this.size);
+        }
+        for (int i = index + 1; i <= this.size; i++) {
+            this.elements[i] = this.elements[i - 1];
+        }
+        this.elements[index] = e;
+        this.size++;
+    }
+
     public E get(int index) { // Lấy ra giá trị của 1 phần tử trong mảng theo vị trí tương ứng
-        if (index < 0 || index >= this.size) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size" + size);
-                // Nếu vị trí k hợp lệ thì ném ra lỗi
+        if (index < 0 || index > this.size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size" + this.size);
+            // Nếu vị trí k hợp lệ thì ném ra lỗi
         }
         return (E) this.elements[index];
+    }
+
+    public void remove(int index) {
+        if (index < 0 || index > this.size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size" + this.size);
+        }
+        for (int i = index; i < this.size; i++) {
+            this.elements[i] = this.elements[i + 1];
+        }
+        this.size--;
     }
 }
